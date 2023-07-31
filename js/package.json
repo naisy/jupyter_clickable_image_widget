@@ -17,68 +17,27 @@
   ],
   "files": [
     "lib/**/*.js",
-    "dist/*.js",
-    "style/index.js"
+    "dist/*.js"
   ],
   "scripts": {
-    "build": "jlpm build:lib && jlpm build:labextension:dev",
-    "build:labextension": "jupyter labextension build .",
-    "build:labextension:dev": "jupyter labextension build --development True .",
-    "build:lib": "tsc --sourceMap",
-    "build:lib:prod": "tsc",
-    "build:prod": "jlpm clean && jlpm build:lib:prod && jlpm build:labextension",
-    "clean": "jlpm clean:lib",
-    "clean:all": "jlpm clean:lib && jlpm clean:labextension && jlpm clean:lintcache",
-    "clean:labextension": "rimraf jupyter_clickable_image_widget/labextension jupyter_clickable_image_widget/_version.py",
-    "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
-    "clean:lintcache": "rimraf .eslintcache .stylelintcache",
-    "eslint": "jlpm eslint:check --fix",
-    "eslint:check": "eslint . --cache --ext .ts,.tsx",
-    "install:extension": "jlpm build",
-    "lint": "jlpm stylelint && jlpm prettier && jlpm eslint",
-    "lint:check": "jlpm stylelint:check && jlpm prettier:check && jlpm eslint:check",
-    "prettier": "jlpm prettier:base --write --list-different",
-    "prettier:base": "prettier \"**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}\"",
-    "prettier:check": "jlpm prettier:base --check",
-    "stylelint": "jlpm stylelint:check --fix",
-    "stylelint:check": "stylelint --cache \"style/**/*.css\"",
-    "test": "jest --coverage",
-    "watch": "run-p watch:src watch:labextension",
-    "watch:labextension": "jupyter labextension watch .",
-    "watch:src": "tsc -w"
+    "clean": "rimraf dist/",
+    "prepublish": "webpack",
+    "build": "webpack",
+    "watch": "webpack --watch --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3",
-    "@babel/preset-env": "^7.20.2",
+    "rimraf": "^3.0.2",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@jupyter-widgets/jupyterlab-manager":"^3.0.0",
     "@jupyter-widgets/base": "^6.0.3",
     "@jupyter-widgets/controls": "^5.0.4",
-    "@jupyterlab/builder": "^3.6.2",
-    "@jupyterlab/testutils": "^3.6.2",
-    "@types/jest": "^26.0.24",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "css-loader": "^6.7.3",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "jest": "^26.6.3",
-    "lodash": "^4.17.21",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.6",
-    "rimraf": "^3.0.2",
-    "stylelint": "^14.16.1",
-    "stylelint-config-prettier": "^9.0.5",
-    "stylelint-config-recommended": "^6.0.0",
-    "stylelint-config-standard": "^24.0.0",
-    "stylelint-prettier": "^2.0.0",
-    "ts-jest": "^26.5.6",
-    "typescript": "^4.1.6",
-    "webpack": "^5.0.0"
+    "lodash": "^4.17.21"
   },
-  "dependencies": {},
   "jupyterlab": {
-    "extension": "lib/labplugin",
-    "outputDir": "jupyter_clickable_image_widget/labextension"
-  },
-  "styleModule": []
+    "extension": "lib/labplugin"
+  }
 }
