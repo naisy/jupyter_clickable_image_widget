@@ -27,11 +27,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2",
-    "webpack": "^5.76.3",
-    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "rimraf": "^3.0.2",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.1.4",
     "@jupyter-widgets/jupyterlab-manager":"^3.0.0",
